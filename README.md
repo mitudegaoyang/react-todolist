@@ -42,3 +42,25 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## 发现问题
+
+### 1 Objects are not valid as a React child 错误处理
+
+```
+Objects are not valid as a React child (found: object with keys {value, onChange}). 
+If you meant to render a collection of children, 
+use an array instead or wrap the object using createFragment(object) from the React add-ons.
+```
+
+当使用react 输出一个object 的时候，会报错
+
+```
+<span>{{name:1}}</span>
+```
+
+正确如下：
+
+```
+<span>{1}</span>
+```
