@@ -11,6 +11,11 @@ class TodoList extends Component {
       list: [],
       inputValue: ''
     }
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleBtnClick = this.handleBtnClick.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   handleBtnClick () {
@@ -26,14 +31,14 @@ class TodoList extends Component {
     })
   }
 
-  handleItemClick (index) {
-    const list = [...this.state.list]
-    list.splice(index, 1);
-    // this.setState({
-    //   list: list
-    // })
-    this.setState({list})
-  }
+  // handleItemClick (index) {
+  //   const list = [...this.state.list]
+  //   list.splice(index, 1);
+  //   // this.setState({
+  //   //   list: list
+  //   // })
+  //   this.setState({list})
+  // }
 
   handleDelete (list) {
     this.setState({list})
@@ -44,6 +49,23 @@ class TodoList extends Component {
     const list = [...this.state.list]
     list.splice(index, 1);
     this.setState({list})
+  }
+
+  getTodoItems() {
+    return (
+      this.state.list.map((item, index) => {
+        return (
+            <TodoItem
+                handleDelete={this.handleDelete}
+                delete={this.delete}
+                key={index}
+                content={item}
+                index={index}
+                list={this.state.list}
+            />
+        )
+      })
+    )
   }
 
   // 父组件通过属性向子组件传递参数
@@ -57,17 +79,16 @@ class TodoList extends Component {
         {/*{ 1 + 2}*/}
         {/*hello world*/}
         <div>
-          <input value={this.state.inputValue} type="text" onChange={this.handleInputChange.bind(this)}/>
-          <button onClick={this.handleBtnClick.bind(this)}>add</button>
+          {/*<input value={this.state.inputValue} type="text" onChange={this.handleInputChange.bind(this)}/>*/}
+          <input value={this.state.inputValue} type="text" onChange={this.handleInputChange}/>
+          {/*<button onClick={this.handleBtnClick.bind(this)}>add</button>*/}
+          <button onClick={this.handleBtnClick}>add</button>
         </div>
         <div>
           <ul>
-            {
-              this.state.list.map((item, index) => {
-                return <TodoItem handleDelete={this.handleDelete.bind(this)} delete={this.delete.bind(this)} key={index} content={item} index={index} list={this.state.list}/>
-                {/*return <li key={index} onClick={this.handleItemClick.bind(this, index)}>{item.name}</li>*/}
-              })
-            }
+            {/*return <TodoItem handleDelete={this.handleDelete.bind(this)} delete={this.delete.bind(this)} key={index} content={item} index={index} list={this.state.list}/>*/}
+            {/*return <li key={index} onClick={this.handleItemClick.bind(this, index)}>{item.name}</li>*/}
+            { this.getTodoItems() }
           </ul>
         </div>
       </div>
