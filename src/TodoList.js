@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import TodoItem from './TodoItem';
 import './TodoList.css';
 
@@ -74,24 +74,21 @@ class TodoList extends Component {
   render() {
     return (
       // jsx语法
-      <div className="App">
+      <Fragment>
         {/* js表达式*/}
         {/*{ 1 + 2}*/}
         {/*hello world*/}
-        <div>
-          {/*<input value={this.state.inputValue} type="text" onChange={this.handleInputChange.bind(this)}/>*/}
-          <input value={this.state.inputValue} type="text" onChange={this.handleInputChange}/>
-          {/*<button onClick={this.handleBtnClick.bind(this)}>add</button>*/}
-          <button onClick={this.handleBtnClick}>add</button>
-        </div>
-        <div>
-          <ul>
-            {/*return <TodoItem handleDelete={this.handleDelete.bind(this)} delete={this.delete.bind(this)} key={index} content={item} index={index} list={this.state.list}/>*/}
-            {/*return <li key={index} onClick={this.handleItemClick.bind(this, index)}>{item.name}</li>*/}
-            { this.getTodoItems() }
-          </ul>
-        </div>
-      </div>
+        {/*<input value={this.state.inputValue} type="text" onChange={this.handleInputChange.bind(this)}/>*/}
+        <input value={this.state.inputValue} type="text" onChange={this.handleInputChange}/>
+        {/*<button onClick={this.handleBtnClick.bind(this)}>add</button>*/}
+        {/*<button style={{background: 'red', color: '#fff'}} onClick={this.handleBtnClick}>add</button>*/}
+        <button className="redBtn" onClick={this.handleBtnClick}>add</button>
+        <ul>
+          {/*return <TodoItem handleDelete={this.handleDelete.bind(this)} delete={this.delete.bind(this)} key={index} content={item} index={index} list={this.state.list}/>*/}
+          {/*return <li key={index} onClick={this.handleItemClick.bind(this, index)}>{item.name}</li>*/}
+          { this.getTodoItems() }
+        </ul>
+      </Fragment>
     );
   }
 }
