@@ -1,3 +1,4 @@
+// Fragment用来处理根节点不唯一的情况
 import React, { Component, Fragment } from 'react';
 import TodoItem from './TodoItem';
 import './TodoList.css';
@@ -12,6 +13,7 @@ class TodoList extends Component {
       inputValue: ''
     }
 
+    // 代码优化
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleBtnClick = this.handleBtnClick.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -33,10 +35,13 @@ class TodoList extends Component {
 
   // handleItemClick (index) {
   //   const list = [...this.state.list]
+  // 拷贝data再进行修改 因为React不推荐直接修改数据 而是都通过setState的方式将变化后的数据保存在原数据中
+  // 如果直接修改 可能会导致调bug变得困难 以及代码变得效率低下
   //   list.splice(index, 1);
   //   // this.setState({
   //   //   list: list
   //   // })
+  // ES6中键和值一致可以省略'键:'
   //   this.setState({list})
   // }
 
@@ -51,6 +56,7 @@ class TodoList extends Component {
     this.setState({list})
   }
 
+  // 代码优化 将代码循环的方法提炼出来 写在render函数外部
   getTodoItems() {
     return (
       this.state.list.map((item, index) => {
